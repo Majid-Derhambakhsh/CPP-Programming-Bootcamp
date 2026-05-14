@@ -1,0 +1,49 @@
+﻿#include <iostream>
+
+using namespace std;
+
+#define NO_COMPUTERS_MAX 32 
+
+int main()
+{
+
+	int numOfComputer = 0; // N.O Computer
+	int numOfTeam = 0; // N.O Groups
+	unsigned int computerStatus = 0;
+
+	cout << "Enter numOfComputer, numOfTeam: ";
+	cin >> numOfComputer >> numOfTeam;
+
+	for (int i = 0; i < numOfTeam; i++)
+	{
+		int numOfMembers = 0;
+		int startPos = 0;
+
+		cout << "Enter StartPos, NumOfMembers: ";
+		cin >> startPos >> numOfMembers;
+
+		if ((numOfComputer - startPos + 1) < numOfMembers)
+		{
+			cout << "No\n";
+			continue;
+		}
+		
+		for (int i = 0; i < numOfMembers; i++)
+		{
+
+			computerStatus = computerStatus + (1 << (NO_COMPUTERS_MAX - startPos));
+			// computerStatus = computerStatus + (1 << (sizeof(computerStatus) * 8 - startPos));
+			startPos++;
+
+		}
+
+		for (int i = 0; i < numOfComputer; i++)
+		{
+			cout << ((computerStatus >> ((NO_COMPUTERS_MAX - 1) - i)) & 1);
+		}
+		
+		cout << endl;
+
+	}
+
+}
